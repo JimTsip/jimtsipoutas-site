@@ -11,7 +11,7 @@
     "name": "rolldown-runtime"
   },
   "components/ChatDock.tsx": {
-    "file": "_next/static/chunks/ChatDock-BzBmewPt.js",
+    "file": "_next/static/chunks/ChatDock-DDh5Ii3t.js",
     "name": "ChatDock",
     "src": "components/ChatDock.tsx",
     "isDynamicEntry": true,
@@ -31,7 +31,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-VRVK6sxF.js",
+    "file": "_next/static/chunks/layout-segment-context-Ix1w7T2J.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -42,7 +42,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-DEcdeVV6.js",
+    "file": "_next/static/chunks/index-DQpJTc_j.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
