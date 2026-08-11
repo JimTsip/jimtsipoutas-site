@@ -1,0 +1,23 @@
+# Jim Tsipoutas
+
+> Jim Tsipoutas (Dimitris Tsipoutas) is a design leader and hands-on builder — AI-enabled design leadership combined with craftsmanship, framing and building intelligent products alongside teams.
+
+## What he does
+Product direction, interface systems and AI-first products: the framing that decides what to build, the design system that keeps it coherent, and the engineering that gets it shipped. Leadership by building rather than by slide deck.
+
+- Product direction and framing.
+- Interface systems and design principles at scale.
+- AI-first products, designed and built end to end.
+- Design leadership embedded with teams.
+
+## Available for
+Design leadership, consulting and fractional work with teams building intelligent products.
+
+## Work
+Founder of [The Last Click](https://thelastclick.gr), where the products live: Padlboard (padel scoring for Apple Watch and iPhone), BoomBoats (a voxel iPhone game), Cookonomics (food costing) and FlexUI (an API-driven design system for AI coding tools).
+
+## Contact
+hello@jimtsipoutas.com — the contact form on the site reaches the same inbox.
+
+## Pages
+- [Home](https://jimtsipoutas.com/): a single scroll-driven page covering the work, the principles and how to get in touch.
