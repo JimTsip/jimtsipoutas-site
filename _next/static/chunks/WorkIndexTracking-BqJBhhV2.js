@@ -1,1 +1,0 @@
-import{r as e}from"./rolldown-runtime-C60lm6uB.js";import{r as t}from"./framework-BgSIrAUN.js";import{o as n}from"./case-analytics-DZZubS4Z.js";var r=e(t(),1);function i(){return(0,r.useEffect)(()=>{n()},[]),null}export{i as WorkIndexTracking};
