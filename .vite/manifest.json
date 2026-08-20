@@ -62,7 +62,7 @@
     ]
   },
   "components/case/StoreBadges.tsx": {
-    "file": "_next/static/chunks/StoreBadges-D8VacpKD.js",
+    "file": "_next/static/chunks/StoreBadges-DX_PLmqy.js",
     "name": "StoreBadges",
     "src": "components/case/StoreBadges.tsx",
     "isDynamicEntry": true,
@@ -94,7 +94,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-C1xv02jz.js",
+    "file": "_next/static/chunks/layout-segment-context-Cvk150Wq.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -105,7 +105,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-BrLtRmp2.js",
+    "file": "_next/static/chunks/index-ChN4Ie-_.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
