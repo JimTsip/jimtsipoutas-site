@@ -1,0 +1,1 @@
+var e=(e,t=100)=>e.length>t?`${e.slice(0,t-1)}…`:e;function t(t,n={}){let r={};for(let[t,i]of Object.entries(n))i!==void 0&&(r[t]=typeof i==`string`?e(i):i);window.gtag?.(`event`,t,r),window.dataLayer?.push({event:t,...r})}export{t};
