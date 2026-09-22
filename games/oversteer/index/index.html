@@ -49,9 +49,11 @@
 
   header,footer{position:relative; z-index:1; text-align:center; flex:0 0 auto}
 
-  .wordmark{
-    font-family:"Anton",sans-serif; font-size:clamp(26px,4.4vh,40px);
-    letter-spacing:.04em; color:var(--lime); margin:0; line-height:1;
+  /* The wordmark is a brand asset, never type — the skew and chrome are in the image. */
+  .wordmark{margin:0; line-height:0}
+  .wordmark img{
+    height:clamp(26px,4.4vh,40px); width:auto; display:block; margin:0 auto;
+    filter:drop-shadow(0 0 18px rgba(201,245,61,.28));
   }
   .tagline{
     margin:8px 0 0; font-size:13px; font-weight:500; color:var(--muted);
@@ -111,7 +113,7 @@
 </div>
 
 <header>
-  <h1 class="wordmark">OVERSTEER</h1>
+  <h1 class="wordmark"><img src="wordmark.webp" alt="OVERSTEER" width="887" height="120" fetchpriority="high"></h1>
   <p class="tagline">A crash game told through a drift car. Nobody steers — the only decision is when to cash out.</p>
 </header>
 
