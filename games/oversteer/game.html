@@ -26,6 +26,9 @@
 }
 html,body{height:100%;}
 body{
+  /* A standalone page gets no reset from a host, and the UA's default 8px body
+     margin pushes the bottom nav off a 844px-tall viewport. */
+  margin:0;
   background:radial-gradient(1100px 620px at 50% -8%, #241a52 0%, rgba(8,6,18,0) 62%), var(--ink);
   color:var(--text);
   font-family:var(--f-b);
