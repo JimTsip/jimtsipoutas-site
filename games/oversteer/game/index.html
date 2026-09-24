@@ -1044,8 +1044,9 @@ function save(){try{localStorage.setItem('oversteer.v2',JSON.stringify(
 /* The whole round is decided here, before the car turns a wheel.
    Standard crash-game curve: P(crash point > m) = (1-edge)/m, so the expected
    return is a flat (1-edge) whatever multiplier the player aims for.
-   HOUSE_EDGE 3%, plus a 2% instant-bust slice, exactly like the real thing. */
-var HOUSE_EDGE=0.03, BUST_CHANCE=0.02;
+   HOUSE_EDGE 3% and nothing else: the slice of the curve that lands below 1.00
+   IS the instant bust, so the edge the player pays is exactly the constant. */
+var HOUSE_EDGE=0.03;
 function fnv(str){
   var h=2166136261;
   for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}
@@ -1055,9 +1056,16 @@ function crashFromSeed(seed){
   var rnd=mulberry32(fnv(seed));
   rnd();rnd();                               // discard, decorrelate from the seed bits
   var u=rnd();
-  if(u<BUST_CHANCE)return 1.00;              // gone off the line before it ever hooked up
-  u=(u-BUST_CHANCE)/(1-BUST_CHANCE);
-  return Math.max(1.01,Math.min(500,Math.floor(((1-HOUSE_EDGE)/(1-u))*100)/100));
+  var c=Math.floor(((1-HOUSE_EDGE)/(1-u))*100)/100;
+  /* Rounds the curve puts below 1.00 are the instant bust - gone off the line
+     before it ever hooked up. They are NOT a separate slice, and they must not
+     be clamped up to 1.01: doing that made 1.01x the best play in the game,
+     because every surviving round reached it. Cashing at 1.01 returned 98.9%
+     against 95% everywhere else, cutting the house edge to a quarter.
+     Left alone, P(crash >= t) = (1-edge)/t, so payback is (1-edge) at EVERY
+     target - which is the whole point of the curve. */
+  if(c<1.00)return 1.00;
+  return Math.min(500,c);
 }
 
 /* ==================================================================
@@ -1256,10 +1264,15 @@ function goLive(){
 }
 function cashOut(auto){
   if(G.phase!=='live'||!G.staked)return;
-  G.payout=Math.round(G.stakeAmt*G.mult);
+  /* An auto cash-out settles on the target the player set, not on wherever the
+     frame happened to land past it. Frames are ~0.3% apart at 2x and the
+     overshoot was always in the player's favour. A manual press still pays what
+     is on screen, because that is what the player actually saw and tapped. */
+  var at=auto?Math.min(G.auto,G.mult):G.mult;
+  G.payout=Math.round(G.stakeAmt*at);
   G.balance+=G.payout;renderWallet();
   G.reason=auto?'AUTO CASH OUT':'CASH OUT';
-  var stake=G.stakeAmt;G.cashedAt=G.mult;G.staked=false;
+  var stake=G.stakeAmt;G.cashedAt=at;G.staked=false;
   elTint.className='tint win';
   elMulti.className='multi';
   elKicker.className='kicker on';elKicker.style.color='var(--lime)';
@@ -1421,8 +1434,22 @@ function step(dt){
     var slipT=-(0.11+0.19*load)+swing-G.latVel*0.05-G.moment*0.32;
     G.yaw=lerp(G.yaw,clamp(slipT,-0.95,0.32),1-Math.pow(0.02,dt));
 
+    /* The crash is resolved FIRST. A frame is ~0.3% of a multiplier wide at 2x,
+       so when one frame crosses both the auto target and the crash point the
+       round is already over - paying the auto first handed the player a win on
+       4.8% of rounds that had crashed (at a 1.01x target). The house takes the
+       tie, the way it does everywhere else. */
+    if(G.mult>=G.crashAt){
+      /* An auto cash-out is an instruction - "take me out at X" - so it is judged
+         against the real crash point, not against which side of a discrete frame
+         the multiplier happened to be on. Target below the crash point: the
+         round reached the target, the instruction was carried out - including
+         when the crash point IS the target, which is how crash games settle it.
+         Denying that tie cost a 1.01x player 0.95% of payback for no reason. */
+      if(G.staked&&G.autoOn&&G.auto<=G.crashAt)cashOut(true);
+      crash();return;
+    }
     if(G.staked&&G.autoOn&&G.mult>=G.auto)cashOut(true);   // banking does not end the run
-    if(G.mult>=G.crashAt){crash();return;}
   }
   else if(G.phase==='crashing'){
     G.overT+=dt;G.wob+=dt;
